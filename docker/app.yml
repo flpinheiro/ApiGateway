@@ -1,0 +1,11 @@
+version: '2'
+services:
+  apigateway-app:
+    image: apigateway
+    depends_on:
+      - db
+    build:
+      context: ../
+      dockerfile: src/ApiGateway/Dockerfile
+    ports:
+      - 80:80
