@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Ocelot.DependencyInjection;
+using Ocelot.Middleware;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,11 +28,6 @@ namespace Compuletra.ApiGateway
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services
-                .AddWebModule()
-                .AddSwaggerModule()
-                .AddSecurityModule(Configuration);
-
             services.AddOcelot();
         }
 
@@ -43,20 +39,8 @@ namespace Compuletra.ApiGateway
                 app.UseDeveloperExceptionPage();
             }
 
-            //app.UseRouting();
-
-            //app.UseEndpoints(endpoints =>
-            //{
-            //    endpoints.MapGet("/", async context =>
-            //    {
-            //        await context.Response.WriteAsync("Hello World!");
-            //    });
-            //});
-
-            app
-                .UseApplicationWeb()
-                .UseApplicationSwagger()
-                .UseApplicationSecurity();
+            app.UseHttpsRedirection();
+            app.UseOcelot().Wait();
         }
     }
 }

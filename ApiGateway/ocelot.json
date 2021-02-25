@@ -1,40 +1,24 @@
 {
   "Routes": [
-    // jhipster-needle-add-route-to-gateway - JHipster will add route to gateway
     {
-      "DownstreamPathTemplate": "/api/{version}/{everything}",
-      "DownstreamScheme": "http",
+      "DownstreamPathTemplate": "/weatherforecast",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
-          "Host": "catalog-api",
-          "Port": 80
+          "Host": "localhost",
+          "Port": 5001
         }
       ],
-      "UpstreamPathTemplate": "/api/{version}/c/{everything}",
-      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ]
-    },
-    {
-      "DownstreamPathTemplate": "/api/{version}/{everything}",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "basket-api",
-          "Port": 80
-        }
-      ],
-      "UpstreamPathTemplate": "/api/{version}/b/{everything}",
-      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "IdentityApiKey",
-        "AllowedScopes": []
-      }
+      "UpstreamHttpMethod": [ "Get" ],
+      "UpstreamPathTemplate": "/weatherforecast"
     }
   ],
   "GlobalConfiguration": {
-    "ServiceDiscoveryProvider": {
-      "Host": "localhost",
-      "Port": 8500,
-      "Type": "Consul"
-    }
+    "baseUri": "http://localhost:5050"
+    //"ServiceDiscoveryProvider": {
+    //  "Host": "localhost",
+    //  "Port": 8500,
+    //  "Type": "Consul"
+    //}
   }
 }
