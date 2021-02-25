@@ -1,7 +1,7 @@
 {
   "Routes": [
     {
-      "DownstreamPathTemplate": "/weatherforecast",
+      "DownstreamPathTemplate": "/{url}",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
@@ -10,15 +10,25 @@
         }
       ],
       "UpstreamHttpMethod": [ "Get" ],
-      "UpstreamPathTemplate": "/weatherforecast"
+      "UpstreamPathTemplate": "/{url}"
+    },
+    {
+      "UseServiceDiscovery": true,
+      "DownstreamPathTemplate": "/{url}",
+      "DownstreamScheme": "http",
+      "ServiceName": "WebClientConsul",
+      "UpstreamHttpMethod": [ "Get" ],
+      "UpstreamPathTemplate": "/api/{url}",
+      "ReRouteCaseSensitive": false
     }
   ],
   "GlobalConfiguration": {
-    "baseUri": "http://localhost:5050"
-    //"ServiceDiscoveryProvider": {
-    //  "Host": "localhost",
-    //  "Port": 8500,
-    //  "Type": "Consul"
-    //}
+    "baseUri": "http://localhost:5050",
+    "ServiceDiscoveryProvider": {
+      "Scheme": "https",
+      "Host": "localhost",
+      "Port": 8500,
+      "Type": "Consul"
+    }
   }
 }
