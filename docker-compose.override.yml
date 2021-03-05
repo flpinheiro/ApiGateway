@@ -5,7 +5,6 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=https://+:443;http://+:80
-      - API_URL=webclientconsul:5001
     ports:
       - "5050:80"
       - "5051:443"
