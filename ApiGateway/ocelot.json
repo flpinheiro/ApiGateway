@@ -50,7 +50,7 @@
     //"baseUri": "http://localhost:80",
     "ServiceDiscoveryProvider": {
       "Scheme": "http",
-      "Host": "localhost",
+      "Host": "10.0.18.30",
       "Port": 8500,
       "Type": "Consul"
     }
