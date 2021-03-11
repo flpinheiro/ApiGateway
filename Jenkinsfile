@@ -20,6 +20,7 @@ pipeline{
         }
         stage('Clean'){
             steps{
+                echo VERSION
                 sh 'dotnet clean -c Release'
             }
             post{
@@ -62,7 +63,7 @@ pipeline{
 
         stage("Docker Build"){
             steps{
-                sh 'docker build -f ./ApiGateway/Dockerfile -t 10.0.18.30:8082/compuletra.api.gateway:${VERSION}.$BUILD_NUMBER .'
+                sh 'docker build -f ./ApiGateway/Dockerfile -t 10.0.18.30:8082/compuletra.api.gateway:$VERSION.$BUILD_NUMBER .'
                 sh 'docker build -f ./ApiGateway/Dockerfile -t 10.0.18.30:8082/compuletra.api.gateway:latest .'
             }
             post{
