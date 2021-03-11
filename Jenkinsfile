@@ -4,14 +4,14 @@ def version(){
 }
 pipeline{
     agent any
-    // environment {
-    //     VERSION = ''
-    // }
+    environment {
+        VERSION
+    }
     stages{
         stage("Get Version"){
             steps{
                 script{
-                    env VERSION = version()
+                    VERSION = version()
                     echo VERSION
                 }
             }
