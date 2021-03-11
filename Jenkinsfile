@@ -11,7 +11,7 @@ pipeline{
         stage("Get Version"){
             steps{
                 script{
-                    set VERSION = version()
+                    env VERSION = version()
                     echo VERSION
                 }
             }
