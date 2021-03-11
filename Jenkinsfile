@@ -3,17 +3,18 @@ def getVersion(){
     matchar ? matchar[0][1] : null
 }
 
-def VERSION
 pipeline{
     agent any
-
+    environment{
+        VERSION = getVersion()
+    }
     stages{
         stage("Get Version"){
             steps{
                 script{
-                    def v = getVersion()
-                    VERSION = v
-                    echo v
+                    // def v = getVersion()
+                    // VERSION = v
+                    // echo v
                     echo VERSION
                 }
             }
@@ -63,7 +64,7 @@ pipeline{
 
         stage("Docker Build"){
             steps{
-                sh 'docker build -f ./ApiGateway/Dockerfile -t 10.0.18.30:8082/compuletra.api.gateway:VERSION.$BUILD_NUMBER .'
+                sh 'docker build -f ./ApiGateway/Dockerfile -t 10.0.18.30:8082/compuletra.api.gateway:$VERSION.$BUILD_NUMBER .'
                 sh 'docker build -f ./ApiGateway/Dockerfile -t 10.0.18.30:8082/compuletra.api.gateway:latest .'
             }
             post{
