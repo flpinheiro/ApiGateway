@@ -7,6 +7,6 @@ services:
     build:
       context: .
       dockerfile: ApiGateway/Dockerfile
-    depends_on:
-      - consul
+    # depends_on:
+    #   - consul
       
