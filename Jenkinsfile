@@ -5,13 +5,13 @@ def version(){
 pipeline{
     agent any
     environment {
-        VERSION
+        VERSION = ''
     }
     stages{
         stage("Get Version"){
             steps{
                 script{
-                    VERSION = version()
+                    set VERSION = version()
                     echo VERSION
                 }
             }
