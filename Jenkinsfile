@@ -2,6 +2,8 @@ def getVersion(){
     def matchar = readFile('ApiGateway/ApiGateway.csproj') =~ '<Version>(.+)</Version>'
     matchar ? matchar[0][1] : null
 }
+
+def VERSION
 pipeline{
     agent any
 
@@ -10,10 +12,8 @@ pipeline{
             steps{
                 script{
                     def v = getVersion()
+                    VERSION = v
                     echo v
-                    environment {
-                        VERSION = v
-                    }
                     echo VERSION
                 }
             }
