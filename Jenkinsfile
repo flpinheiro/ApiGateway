@@ -9,16 +9,6 @@ pipeline{
         VERSION = getVersion()
     }
     stages{
-        // stage("Get Version"){
-        //     steps{
-        //         script{
-        //             // def v = getVersion()
-        //             // VERSION = v
-        //             // echo v
-        //             echo VERSION
-        //         }
-        //     }
-        // }
         stage('Clean'){
             steps{
                 sh 'dotnet clean -c Release'
@@ -79,7 +69,7 @@ pipeline{
         stage("Docker Push"){
             steps{
                 sh 'docker login -u jenkins -p jenkins 10.0.18.30:8082/docker-hosted'
-                sh 'docker push 10.0.18.30:8082/compuletra.api.gateway:$VERSION-$BUILD_NUMBER'
+                sh 'docker push 10.0.18.30:8082/compuletra.api.gateway:$VERSION.$BUILD_NUMBER'
                 sh 'docker push 10.0.18.30:8082/compuletra.api.gateway:latest'
             }
             post{
@@ -105,23 +95,7 @@ pipeline{
                     echo "======== docker Compose failed ========"
                 }
             }              
-        }
-
-        // stage("Docker Clean"){
-        //     steps{
-        //         sh 'docker image prune -f'
-        //         sh 'docker container prune -f'
-        //         sh 'docker volume prune -f'
-        //     }
-        //     post{
-        //         success{
-        //             echo "======== docker Clean successfully ========"
-        //         }
-        //         failure{
-        //             echo "======== docker Clean failed ========"
-        //         }
-        //     }             
-        // }        
+        }    
     }
     post{
         success{
@@ -129,6 +103,11 @@ pipeline{
         }
         failure{
             echo "======== pipeline failed ========"
+        }
+        always{
+            sh 'docker image prune -f'
+            sh 'docker container prune -f'
+            sh 'docker volume prune -f'
         }
     }
 }
