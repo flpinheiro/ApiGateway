@@ -9,19 +9,18 @@ pipeline{
         VERSION = getVersion()
     }
     stages{
-        stage("Get Version"){
-            steps{
-                script{
-                    // def v = getVersion()
-                    // VERSION = v
-                    // echo v
-                    echo VERSION
-                }
-            }
-        }
+        // stage("Get Version"){
+        //     steps{
+        //         script{
+        //             // def v = getVersion()
+        //             // VERSION = v
+        //             // echo v
+        //             echo VERSION
+        //         }
+        //     }
+        // }
         stage('Clean'){
             steps{
-                sh 'echo $VERSION'
                 sh 'dotnet clean -c Release'
             }
             post{
@@ -80,7 +79,7 @@ pipeline{
         stage("Docker Push"){
             steps{
                 sh 'docker login -u jenkins -p jenkins 10.0.18.30:8082/docker-hosted'
-                sh 'docker push 10.0.18.30:8082/compuletra.api.gateway:${VERSION}-$BUILD_NUMBER'
+                sh 'docker push 10.0.18.30:8082/compuletra.api.gateway:$VERSION-$BUILD_NUMBER'
                 sh 'docker push 10.0.18.30:8082/compuletra.api.gateway:latest'
             }
             post{
