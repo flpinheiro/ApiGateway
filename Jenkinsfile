@@ -64,7 +64,7 @@ pipeline{
 
         stage("Docker Build"){
             steps{
-                sh 'docker build -f ./ApiGateway/Dockerfile -t 10.0.18.30:8082/compuletra.api.gateway:$VERSION-$BUILD_NUMBER .'
+                sh 'docker build -f ./ApiGateway/Dockerfile -t 10.0.18.30:8082/compuletra.api.gateway:${VERSION}.$BUILD_NUMBER .'
                 sh 'docker build -f ./ApiGateway/Dockerfile -t 10.0.18.30:8082/compuletra.api.gateway:latest .'
             }
             post{
@@ -80,7 +80,7 @@ pipeline{
         stage("Docker Push"){
             steps{
                 sh 'docker login -u jenkins -p jenkins 10.0.18.30:8082/docker-hosted'
-                sh 'docker push 10.0.18.30:8082/compuletra.api.gateway:$VERSION-$BUILD_NUMBER'
+                sh 'docker push 10.0.18.30:8082/compuletra.api.gateway:${VERSION}-$BUILD_NUMBER'
                 sh 'docker push 10.0.18.30:8082/compuletra.api.gateway:latest'
             }
             post{
