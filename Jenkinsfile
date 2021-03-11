@@ -20,7 +20,7 @@ pipeline{
         }
         stage('Clean'){
             steps{
-                echo VERSION
+                sh 'echo $VERSION'
                 sh 'dotnet clean -c Release'
             }
             post{
