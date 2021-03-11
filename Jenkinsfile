@@ -89,21 +89,21 @@ pipeline{
             }              
         }
 
-        stage("Docker Clean"){
-            steps{
-                sh 'docker image prune -f'
-                sh 'docker container prune -f'
-                sh 'docker volume prune -f'
-            }
-            post{
-                success{
-                    echo "======== docker Clean successfully ========"
-                }
-                failure{
-                    echo "======== docker Clean failed ========"
-                }
-            }             
-        }        
+        // stage("Docker Clean"){
+        //     steps{
+        //         sh 'docker image prune -f'
+        //         sh 'docker container prune -f'
+        //         sh 'docker volume prune -f'
+        //     }
+        //     post{
+        //         success{
+        //             echo "======== docker Clean successfully ========"
+        //         }
+        //         failure{
+        //             echo "======== docker Clean failed ========"
+        //         }
+        //     }             
+        // }        
     }
     post{
         success{

@@ -1,17 +1,29 @@
 {
   "Routes": [
-    //{
-    //  "DownstreamPathTemplate": "/{url}",
-    //  "DownstreamScheme": "https",
-    //  "DownstreamHostAndPorts": [
-    //    {
-    //      "Host": "localhost",
-    //      "Port": 5001
-    //    }
-    //  ],
-    //  "UpstreamHttpMethod": [ "Get" ],
-    //  "UpstreamPathTemplate": "/{url}"
-    //},
+    {
+      "DownstreamPathTemplate": "/{url}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5001
+        }
+      ],
+      "UpstreamHttpMethod": [ "GET" ],
+      "UpstreamPathTemplate": "/{url}"
+    },
+    {
+      "DownstreamPathTemplate": "/api/{url}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "10.0.18.30",
+          "Port": 5052
+        }
+      ],
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ],
+      "UpstreamPathTemplate": "/uaa/{url}"
+    }
     //{
     //  "DownstreamPathTemplate": "/weatherforecast",
     //  "DownstreamScheme": "https",
@@ -24,16 +36,16 @@
     //  "UpstreamHttpMethod": [ "Get" ],
     //  "UpstreamPathTemplate": "/"
     //},
-    {
-      "UseServiceDiscovery": true,
-      "DownstreamPathTemplate": "/{url}",
-      "DownstreamScheme": "https",
-      "ServiceName": "WebClientConsul",
-      "UpstreamHttpMethod": [ "Get" ],
-      "UpstreamPathTemplate": "/api/{url}",
-      "ReRouteCaseSensitive": false//,
-      //"DangerousAcceptAnyServerCertificateValidator": true
-    }
+    //{
+    //  "UseServiceDiscovery": true,
+    //  "DownstreamPathTemplate": "/{url}",
+    //  "DownstreamScheme": "https",
+    //  "ServiceName": "WebClientConsul",
+    //  "UpstreamHttpMethod": [ "Get" ],
+    //  "UpstreamPathTemplate": "/api/{url}",
+    //  "ReRouteCaseSensitive": false//,
+    //  //"DangerousAcceptAnyServerCertificateValidator": true
+    //}
     //,
     //{
     //  "UseServiceDiscovery": true,
@@ -48,11 +60,11 @@
   ],
   "GlobalConfiguration": {
     //"baseUri": "http://localhost:80",
-    "ServiceDiscoveryProvider": {
-      "Scheme": "http",
-      "Host": "10.0.18.30",
-      "Port": 8500,
-      "Type": "Consul"
-    }
+    //"ServiceDiscoveryProvider": {
+    //  "Scheme": "http",
+    //  "Host": "10.0.18.30",
+    //  "Port": 8500,
+    //  "Type": "Consul"
+    //}
   }
 }
