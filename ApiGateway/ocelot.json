@@ -1,40 +1,94 @@
 {
   "Routes": [
-    // jhipster-needle-add-route-to-gateway - JHipster will add route to gateway
     {
-      "DownstreamPathTemplate": "/api/{version}/{everything}",
-      "DownstreamScheme": "http",
+      "DownstreamPathTemplate": "/{url}",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
-          "Host": "catalog-api",
-          "Port": 80
+          "Host": "localhost",
+          "Port": 5001
         }
       ],
-      "UpstreamPathTemplate": "/api/{version}/c/{everything}",
-      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ]
+      "UpstreamHttpMethod": [ "GET" ],
+      "SwaggerKey": "weather",
+      "UpstreamPathTemplate": "/{url}"
     },
     {
-      "DownstreamPathTemplate": "/api/{version}/{everything}",
+      "DownstreamPathTemplate": "/api/{url}",
       "DownstreamScheme": "http",
+      "SwaggerKey": "uaa",
       "DownstreamHostAndPorts": [
         {
-          "Host": "basket-api",
-          "Port": 80
+          "Host": "10.0.18.30",
+          "Port": 5052
         }
       ],
-      "UpstreamPathTemplate": "/api/{version}/b/{everything}",
-      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "IdentityApiKey",
-        "AllowedScopes": []
-      }
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ],
+      "UpstreamPathTemplate": "/uaa/{url}"
     }
+    //{
+    //  "DownstreamPathTemplate": "/weatherforecast",
+    //  "DownstreamScheme": "https",
+    //  "DownstreamHostAndPorts": [
+    //    {
+    //      "Host": "localhost",
+    //      "Port": 5001
+    //    }
+    //  ],
+    //  "UpstreamHttpMethod": [ "Get" ],
+    //  "UpstreamPathTemplate": "/"
+    //},
+    //{
+    //  "UseServiceDiscovery": true,
+    //  "DownstreamPathTemplate": "/{url}",
+    //  "DownstreamScheme": "https",
+    //  "ServiceName": "WebClientConsul",
+    //  "UpstreamHttpMethod": [ "Get" ],
+    //  "UpstreamPathTemplate": "/api/{url}",
+    //  "ReRouteCaseSensitive": false//,
+    //  //"DangerousAcceptAnyServerCertificateValidator": true
+    //}
+    //,
+    //{
+    //  "UseServiceDiscovery": true,
+    //  "DownstreamPathTemplate": "/weatherforecast",
+    //  "DownstreamScheme": "https",
+    //  "ServiceName": "WebClientConsul",
+    //  "UpstreamHttpMethod": [ "Get" ],
+    //  "UpstreamPathTemplate": "/api/",
+    //  "ReRouteCaseSensitive": false,
+    //  "DangerousAcceptAnyServerCertificateValidator": true
+    //}
   ],
   "GlobalConfiguration": {
-    "ServiceDiscoveryProvider": {
-      "Host": "localhost",
-      "Port": 8500,
-      "Type": "Consul"
+    "baseUri": "http://localhost"
+    //"ServiceDiscoveryProvider": {
+    //  "Scheme": "http",
+    //  "Host": "10.0.18.30",
+    //  "Port": 8500,
+    //  "Type": "Consul"
+    //}
+  },
+  "SwaggerEndPoints": [
+    {
+      "Key": "weather",
+      "Config": [
+        {
+          "Name": "weather API",
+          "Version": "v1",
+          "Url": "https://localhost:5001/swagger/v1/swagger.json"
+        }
+      ]
+    },
+    {
+      "Key": "uaa",
+      "Config": [
+        {
+          "Name": "uaa API",
+          "Version": "v2",
+          "Url": "http://10.0.18.30:5052/swagger/v2/swagger.json"
+        }
+      ]
     }
-  }
+  ]
 }

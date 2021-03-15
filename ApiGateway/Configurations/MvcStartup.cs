@@ -1,10 +1,7 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
+using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Compuletra.ApiGateway.Configurations
 {
@@ -12,11 +9,14 @@ namespace Compuletra.ApiGateway.Configurations
     {
         public static IServiceCollection AddWebModule(this IServiceCollection services) 
         {
+            services.AddControllers();
             services.AddHttpContextAccessor();
 
             services.AddHealthChecks();
 
-            services.AddControllers();
+            services.AddOcelot();
+
+            
             return services;
         }
 
@@ -34,7 +34,9 @@ namespace Compuletra.ApiGateway.Configurations
                 endpoints.MapControllers();
             });
 
-            app.Map("/services", MapApiGateway);
+            // app.Map("/services", MapApiGateway);
+            app.UseHttpsRedirection();
+            app.UseOcelot().Wait();
 
             app.UseHealthChecks("/health");
             return app;
@@ -42,6 +44,7 @@ namespace Compuletra.ApiGateway.Configurations
 
         private static void MapApiGateway(IApplicationBuilder app) 
         {
+            //app.UseHttpsRedirection();
             app.UseOcelot().Wait();
         }
     }
