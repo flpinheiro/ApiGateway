@@ -1,12 +1,8 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Serilog;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Compuletra.ApiGateway
 {
@@ -14,7 +10,6 @@ namespace Compuletra.ApiGateway
     {
         public static void Main(string[] args)
         {
-
             try
             {
                 Log.Logger = new LoggerConfiguration()
@@ -37,7 +32,7 @@ namespace Compuletra.ApiGateway
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-            .ConfigureAppConfiguration((host, config) => 
+            .ConfigureAppConfiguration((host, config) =>
             {
                 config
                 .AddJsonFile("ocelot.json", optional: false, reloadOnChange: true)
@@ -45,7 +40,6 @@ namespace Compuletra.ApiGateway
             })
             .ConfigureWebHostDefaults(webBuilder =>
             {
-                    
                 webBuilder.UseStartup<Startup>();
             });
     }
