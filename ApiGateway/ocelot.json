@@ -1,7 +1,7 @@
 {
   "Routes": [
     {
-      "DownstreamPathTemplate": "/{url}",
+      "DownstreamPathTemplate": "/{everything}",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
@@ -11,10 +11,10 @@
       ],
       "UpstreamHttpMethod": [ "GET" ],
       "SwaggerKey": "weather",
-      "UpstreamPathTemplate": "/{url}"
+      "UpstreamPathTemplate": "/{everything}"
     },
     {
-      "DownstreamPathTemplate": "/api/{url}",
+      "DownstreamPathTemplate": "/api/{everything}",
       "DownstreamScheme": "http",
       "SwaggerKey": "uaa",
       "DownstreamHostAndPorts": [
@@ -24,7 +24,7 @@
         }
       ],
       "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ],
-      "UpstreamPathTemplate": "/uaa/{url}"
+      "UpstreamPathTemplate": "/uaa/{everything}"
     }
     //{
     //  "DownstreamPathTemplate": "/weatherforecast",

@@ -2,7 +2,7 @@ version: '3.4'
 
 services:
   apigateway:
-    image: 10.0.18.30:8082/compuletra.api.gateway
+    image: 10.0.18.30:8082/compuletra.api.gateway:latest
     container_name: gateway
     build:
       context: .
