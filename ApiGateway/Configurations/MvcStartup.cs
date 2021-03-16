@@ -9,43 +9,21 @@ namespace Compuletra.ApiGateway.Configurations
     {
         public static IServiceCollection AddWebModule(this IServiceCollection services) 
         {
-            services.AddControllers();
+            services.AddMvc()
+                .SetCompatibilityVersion(Microsoft.AspNetCore.Mvc.CompatibilityVersion.Version_3_0);
             services.AddHttpContextAccessor();
-
             services.AddHealthChecks();
-
             services.AddOcelot();
-
-            
             return services;
         }
 
         public static IApplicationBuilder UseApplicationWeb(this IApplicationBuilder app) 
         {
-            app.UseDefaultFiles();
-            app.UseStaticFiles();
-
             app.UseRouting();
-
-            app.UseAuthorization();
-
-            app.UseEndpoints(endpoints => 
-            {
-                endpoints.MapControllers();
-            });
-
-            // app.Map("/services", MapApiGateway);
+            app.UseStaticFiles();
             app.UseHttpsRedirection();
             app.UseOcelot().Wait();
-
-            app.UseHealthChecks("/health");
             return app;
-        }
-
-        private static void MapApiGateway(IApplicationBuilder app) 
-        {
-            //app.UseHttpsRedirection();
-            app.UseOcelot().Wait();
         }
     }
 }

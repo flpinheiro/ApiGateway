@@ -5,11 +5,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Compuletra.ApiGateway.Configurations
 {
@@ -27,16 +24,6 @@ namespace Compuletra.ApiGateway.Configurations
                 ? Encoding.ASCII.GetBytes(secret)
                 : Convert.FromBase64String(securitySettings.Authentication.Jwt.Base64Secret);
 
-            //bytes[] keyBites;
-            //if (!string.IsNullOrEmpty(secret)) 
-            //{
-            //    keyBites = Encoding.ASCII.GetBytes(secret);
-            //}
-            //else
-            //{
-            //    keyBites = Convert.FromBase64String(securitySettings.Authentication.Jwt.Base64Secret);
-            //}
-
             JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
 
             services.AddAuthentication(options =>
@@ -49,7 +36,7 @@ namespace Compuletra.ApiGateway.Configurations
             {
                 cfg.RequireHttpsMetadata = false;
                 cfg.SaveToken = false;
-                cfg.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+                cfg.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateIssuer = false,
                     ValidateAudience = false,

@@ -1,10 +1,9 @@
+using Compuletra.ApiGateway.Configurations;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Ocelot.DependencyInjection;
-using Ocelot.Middleware;
 
 namespace Compuletra.ApiGateway
 {
@@ -20,15 +19,8 @@ namespace Compuletra.ApiGateway
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSwaggerForOcelot(Configuration, (o) =>
-             {
-                 o.GenerateDocsForGatewayItSelf = true;
-
-             });
-            services.AddOcelot();
-
-            services.AddMvc()
-                .SetCompatibilityVersion(Microsoft.AspNetCore.Mvc.CompatibilityVersion.Version_3_0);
+            services.AddSwaggerModule(Configuration);
+            services.AddWebModule();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -42,12 +34,8 @@ namespace Compuletra.ApiGateway
                 app.UseHsts();
             }
 
-            app.UseRouting();
-            app.UseStaticFiles();
-            app.UseHttpsRedirection();
-
-            app.UseSwaggerForOcelotUI();
-            app.UseOcelot().Wait();
+            app.UseApplicationSwagger();
+            app.UseApplicationWeb();
         }
     }
 }
