@@ -1,18 +1,18 @@
 {
   "Routes": [
-    {
-      "DownstreamPathTemplate": "/{everything}",
-      "DownstreamScheme": "https",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 5001
-        }
-      ],
-      "UpstreamHttpMethod": [ "GET" ],
-      "SwaggerKey": "weather",
-      "UpstreamPathTemplate": "/{everything}"
-    },
+    //{
+    //  "DownstreamPathTemplate": "/{everything}",
+    //  "DownstreamScheme": "https",
+    //  "DownstreamHostAndPorts": [
+    //    {
+    //      "Host": "localhost",
+    //      "Port": 5001
+    //    }
+    //  ],
+    //  "UpstreamHttpMethod": [ "GET" ],
+    //  "SwaggerKey": "weather",
+    //  "UpstreamPathTemplate": "/{everything}"
+    //},
     {
       "DownstreamPathTemplate": "/api/{everything}",
       "DownstreamScheme": "http",
@@ -70,23 +70,23 @@
     //}
   },
   "SwaggerEndPoints": [
-    {
-      "Key": "weather",
-      "Config": [
-        {
-          "Name": "weather API",
-          "Version": "v1",
-          "Url": "https://localhost:5001/swagger/v1/swagger.json"
-        }
-      ]
-    },
+    //{
+    //  "Key": "weather",
+    //  "Config": [
+    //    {
+    //      "Name": "weather API",
+    //      "Version": "v1",
+    //      "Url": "https://localhost:5001/swagger/v1/swagger.json"
+    //    }
+    //  ]
+    //},
     {
       "Key": "uaa",
       "Config": [
         {
           "Name": "uaa API",
           "Version": "v2",
-          "Url": "http://10.0.18.30:5052/swagger/v2/swagger.json"
+          "Url": "http://10.0.18.30:5052/v2/api-docs"
         }
       ]
     }
