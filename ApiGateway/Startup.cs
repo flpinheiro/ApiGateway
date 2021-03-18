@@ -19,6 +19,7 @@ namespace Compuletra.ApiGateway
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSecurityModule(Configuration);
             services.AddSwaggerModule(Configuration);
             services.AddWebModule();
         }
@@ -33,7 +34,7 @@ namespace Compuletra.ApiGateway
             {
                 app.UseHsts();
             }
-
+            app.UseApplicationSecurity();
             app.UseApplicationSwagger();
             app.UseApplicationWeb();
         }
