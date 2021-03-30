@@ -1,30 +1,23 @@
 ﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Compuletra.ApiGateway.Configurations
 {
     public static class SwaggerStartup
     {
-        public static IServiceCollection AddSwaggerModule(this IServiceCollection services) 
+        public static IServiceCollection AddSwaggerModule(this IServiceCollection services, IConfiguration configuration) 
         {
-            services.AddSwaggerGen(c => 
+            services.AddSwaggerForOcelot(configuration, (o) =>
             {
-                c.SwaggerDoc("v2", new Microsoft.OpenApi.Models.OpenApiInfo {Title = "Gateway" });
+                o.GenerateDocsForGatewayItSelf = true;
             });
             return services;
         }
 
         public static IApplicationBuilder UseApplicationSwagger(this IApplicationBuilder app)
         {
-            app.UseSwagger(c => 
-            {
-                c.RouteTemplate = "{documentName}/api-docs";
-            });
-            app.UseSwaggerUI(c => c.SwaggerEndpoint("/v2/api-docs", "Gateway"));
+            app.UseSwaggerForOcelotUI();
             return app;
         } 
     }
