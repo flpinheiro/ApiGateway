@@ -3,7 +3,7 @@ version: '3.4'
 services:
   apigateway:
     environment:
-      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_ENVIRONMENT=Production
       - ASPNETCORE_URLS=http://+:80 #;https://+:443
     ports:
       - "5050:80"
