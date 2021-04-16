@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
+using Ocelot.Provider.Consul;
 
 namespace Compuletra.ApiGateway.Configurations
 {
@@ -13,7 +14,7 @@ namespace Compuletra.ApiGateway.Configurations
                 .SetCompatibilityVersion(Microsoft.AspNetCore.Mvc.CompatibilityVersion.Version_3_0);
             services.AddHttpContextAccessor();
             services.AddHealthChecks();
-            services.AddOcelot();
+            services.AddOcelot().AddConsul();
             return services;
         }
 

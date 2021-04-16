@@ -20,49 +20,27 @@
             }],
             "UpstreamHttpMethod": ["GET", "POST", "PUT", "DELETE"],
             "UpstreamPathTemplate": "/uaa/{everything}"
+        },
+        {
+            "ServiceName": "WebClientConsul",
+            "LoadBalancerOptions": {
+                "Type": "LeastConnection"
+            },
+            "DownstreamPathTemplate": "/WeatherForecast",
+            "DownstreamScheme": "http",
+            "SwaggerKey": "WeatherForecast",
+            "UpstreamHttpMethod": ["GET"],
+            "UpstreamPathTemplate": "/WeatherForecast"
         }
-        //{
-        //  "DownstreamPathTemplate": "/weatherforecast",
-        //  "DownstreamScheme": "https",
-        //  "DownstreamHostAndPorts": [
-        //    {
-        //      "Host": "localhost",
-        //      "Port": 5001
-        //    }
-        //  ],
-        //  "UpstreamHttpMethod": [ "Get" ],
-        //  "UpstreamPathTemplate": "/"
-        //},
-        //{
-        //  "UseServiceDiscovery": true,
-        //  "DownstreamPathTemplate": "/{url}",
-        //  "DownstreamScheme": "https",
-        //  "ServiceName": "WebClientConsul",
-        //  "UpstreamHttpMethod": [ "Get" ],
-        //  "UpstreamPathTemplate": "/api/{url}",
-        //  "ReRouteCaseSensitive": false//,
-        //  //"DangerousAcceptAnyServerCertificateValidator": true
-        //}
-        //,
-        //{
-        //  "UseServiceDiscovery": true,
-        //  "DownstreamPathTemplate": "/weatherforecast",
-        //  "DownstreamScheme": "https",
-        //  "ServiceName": "WebClientConsul",
-        //  "UpstreamHttpMethod": [ "Get" ],
-        //  "UpstreamPathTemplate": "/api/",
-        //  "ReRouteCaseSensitive": false,
-        //  "DangerousAcceptAnyServerCertificateValidator": true
-        //}
+
     ],
     "GlobalConfiguration": {
-        "baseUri": "http://localhost"
-            //"ServiceDiscoveryProvider": {
-            //  "Scheme": "http",
-            //  "Host": "10.0.18.30",
-            //  "Port": 8500,
-            //  "Type": "Consul"
-            //}
+        "ServiceDiscoveryProvider": {
+            "Scheme": "http",
+            "Host": "consul",
+            "Port": 8500,
+            "Type": "Consul"
+        }
     },
     "SwaggerEndPoints": [{
             "Key": "wscadastro",
@@ -78,6 +56,14 @@
                 "Name": "Uaa API",
                 "Version": "v2",
                 "Url": "http://10.0.18.30:5052/v2/api-docs"
+            }]
+        },
+        {
+            "Key": "WeatherForecast",
+            "Config": [{
+                "Name": "WeatherForecast API",
+                "Version": "v1",
+                "Url": "http://webclientconsul/swagger/v1/swagger.json"
             }]
         }
     ]
