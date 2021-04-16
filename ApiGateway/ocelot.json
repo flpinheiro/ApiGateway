@@ -11,13 +11,13 @@
             "UpstreamPathTemplate": "/cadastro/{everything}"
         },
         {
+            "ServiceName": "uaa",
             "DownstreamPathTemplate": "/api/{everything}",
             "DownstreamScheme": "http",
             "SwaggerKey": "uaa",
-            "DownstreamHostAndPorts": [{
-                "Host": "10.0.18.30",
-                "Port": 5052
-            }],
+            "LoadBalancerOptions": {
+                "Type": "LeastConnection"
+            },
             "UpstreamHttpMethod": ["GET", "POST", "PUT", "DELETE"],
             "UpstreamPathTemplate": "/uaa/{everything}"
         },
@@ -55,7 +55,7 @@
             "Config": [{
                 "Name": "Uaa API",
                 "Version": "v2",
-                "Url": "http://10.0.18.30:5052/v2/api-docs"
+                "Url": "http://uaa/v2/api-docs"
             }]
         },
         {
